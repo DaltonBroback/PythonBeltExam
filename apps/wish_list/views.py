@@ -20,6 +20,13 @@ def logout(request):
 def add(request):
     # Item.objects.all().delete()
     return render(request, 'wish_list/create.html')
+def items(request, id):
+    request.session['id'] = id
+    context = {
+        "This_Item": Item.objects.get(id = id),
+        "These_Users": User.objects.filter(items__id = id)
+    }
+    return render(request, 'wish_list/items.html', context)
 
 def create(request):
     user_email = request.session['email']

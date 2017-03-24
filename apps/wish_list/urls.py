@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^add$', views.add, name = 'my_add'),
     url(r'^delete$', views.delete, name = 'my_delete'),
     url(r'^create$', views.create, name = 'my_create'),
+    url(r'^wish_items/(?P<id>\d+)', views.items, name = 'my_items'),
 
 ]

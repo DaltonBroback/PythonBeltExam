@@ -20,7 +20,7 @@
       </tr>
       {% for item in This_Items_Them %}
         <tr>
-          <td>{{item.name}}</td>
+          <td><a href = "{% url 'wish:my_items' id=item.id %}">{{item.name}}</a></td>
           <td>{{item.added_by}}</td>
           <td>{{item.created_at}}</td>
           <td>
@@ -33,7 +33,7 @@
       {% endfor %}
       {% for item in This_Items_Me %}
         <tr>
-          <td>{{item.name}}</td>
+          <td><a href = "{% url 'wish:my_items' id=item.id %}">{{item.name}}</a></td>
           <td>{{item.added_by}}</td>
           <td>{{item.created_at}}</td>
           <td>
@@ -56,7 +56,7 @@
       </tr>
       {% for item in Other_Items %}
         <tr>
-          <td>{{item.name}}</td>
+          <td><a href = "{% url 'wish:my_items' id=item.id %}">{{item.name}}</a></td>
           <td>{{item.added_by}}</td>
           <td>{{item.created_at}}</td>
           <!-- <td><a href="{% url 'wish:my_take' %}"> Add to my wishlist</a></td> -->

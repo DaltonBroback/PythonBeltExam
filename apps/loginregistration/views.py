@@ -59,8 +59,6 @@ def register(request):
             print User.objects.all()
             request.session['username'] = first_name
             request.session['email'] = email
-            request.session['username'] = user.first_name
-            # request.session['this_user'] = User.objects.get(email = email)
             return redirect('wish:my_index')
         else:
             return redirect('/')
