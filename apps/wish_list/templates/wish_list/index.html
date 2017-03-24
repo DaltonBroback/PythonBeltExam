@@ -10,9 +10,65 @@
       <a href="{% url 'wish:my_logout' %}">Logout</a>
       <a href="{% url 'wish:my_add' %}">Add Item</a>
     </div>
-    <form action = "create" method="post">
-      Item/Product <input type="text"  name="item">
-      <button type="submit" name="add">Add</button>
-    </form>
+    <h2>Your Wish List</h2>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Added by</th>
+        <th>Date Added</th>
+        <th>Action</th>
+      </tr>
+      {% for item in This_Items_Them %}
+        <tr>
+          <td>{{item.name}}</td>
+          <td>{{item.added_by}}</td>
+          <td>{{item.created_at}}</td>
+          <td>
+            <form action="remove" method="get">
+              <input type="hidden" name="id" value={{item.id}}>
+              <button type="submit" value="add">Remove From My Wishlist</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      {% for item in This_Items_Me %}
+        <tr>
+          <td>{{item.name}}</td>
+          <td>{{item.added_by}}</td>
+          <td>{{item.created_at}}</td>
+          <td>
+            <form action="delete" method="get">
+              <input type="hidden" name="id" value={{item.id}}>
+              <button type="submit" value="add">Delete Item</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <h2>Other Users' Wish List</h2>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Added by</th>
+        <th>Date Added</th>
+        <th>Action</th>
+      </tr>
+      {% for item in Other_Items %}
+        <tr>
+          <td>{{item.name}}</td>
+          <td>{{item.added_by}}</td>
+          <td>{{item.created_at}}</td>
+          <!-- <td><a href="{% url 'wish:my_take' %}"> Add to my wishlist</a></td> -->
+          <td>
+            <form action="take" method="get">
+              <input type="hidden" name="id" value={{item.id}}>
+              <button type="submit" value="add">Add to My Wishlist</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </ul>
+    </table>
   </body>
 </html>

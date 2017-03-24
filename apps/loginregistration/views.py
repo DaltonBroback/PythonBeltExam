@@ -12,6 +12,7 @@ def index(request):
     # User.objects.all().delete()
     request.session['email'] = ""
     request.session['username'] = ""
+    # request.session['this_user'] = []
     return render(request,'loginregistration/index.html')
 def success(request):
     context = {
@@ -57,6 +58,9 @@ def register(request):
             User.objects.create(first_name=first_name,last_name=last_name,email=email,password=hashed)
             print User.objects.all()
             request.session['username'] = first_name
+            request.session['email'] = email
+            request.session['username'] = user.first_name
+            # request.session['this_user'] = User.objects.get(email = email)
             return redirect('wish:my_index')
         else:
             return redirect('/')
@@ -75,6 +79,7 @@ def login(request):
     if bcrypt.hashpw(password.encode(), user.password.encode()) == user.password:
         request.session['email'] = email
         request.session['username'] = user.first_name
+        # request.session['this_user'] = User.objects.get(email = email)
         return redirect('wish:my_index')
     else:
         messages.add_message(request, messages.INFO, "incorrect password!")
