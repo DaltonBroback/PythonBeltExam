@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('apps.loginregistration.urls', namespace = 'users')),
+    url(r'^wishlist/', include('apps.wish_list.urls', namespace = 'wish')),
 ]

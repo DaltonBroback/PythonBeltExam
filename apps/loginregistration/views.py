@@ -31,7 +31,7 @@ def register(request):
         messages.add_message(request, messages.INFO, "email already in use!")
         return redirect('/')
     except:
-        if len(first_name) < 2:
+        if len(first_name) < 3:
             errors += 1
             messages.add_message(request, messages.INFO, "first name too short!")
         if re.match(NAME_REGEX, first_name):
@@ -40,7 +40,7 @@ def register(request):
         if re.match(NAME_REGEX, last_name):
             errors += 1
             messages.add_message(request, messages.INFO, "last name must only contain letters!")
-        if len(last_name) < 2:
+        if len(last_name) < 3:
             errors += 1
             messages.add_message(request, messages.INFO, "last name too short!")
         if not re.match(EMAIL_REGEX,email):
@@ -57,7 +57,7 @@ def register(request):
             User.objects.create(first_name=first_name,last_name=last_name,email=email,password=hashed)
             print User.objects.all()
             request.session['username'] = first_name
-            return redirect('/success')
+            return redirect('wish:my_index')
         else:
             return redirect('/')
 
@@ -75,7 +75,7 @@ def login(request):
     if bcrypt.hashpw(password.encode(), user.password.encode()) == user.password:
         request.session['email'] = email
         request.session['username'] = user.first_name
-        return redirect('/success')
+        return redirect('wish:my_index')
     else:
         messages.add_message(request, messages.INFO, "incorrect password!")
     return redirect('/')
